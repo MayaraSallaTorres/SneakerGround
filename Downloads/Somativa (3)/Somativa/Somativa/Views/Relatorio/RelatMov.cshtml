@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Somativa.Models.Movimentacao>
+
+@{
+	ViewData["Title"] = "RelatMov";
+	var prod = ViewData["Produtos"] as List<Produto>;
+	prod.Insert(0, new Produto { ProdutoId = new Guid(), Nome = "Todos" });
+}
+
+<h1>RelatMov</h1>
+
+<form>
+	<div class="mt-3 mb-3">
+		<label>Data início</label>
+		<input name="inDataIni" type="date" class="ms-3 me-3" />
+		<label>Data fim</label>
+		<input name="inDataFim" type="date" class="ms-3 me-3" />
+		<label>Tipo de movimentação</label>
+		<select name="inTipo" class="ms-3 me-3">
+			<option value="0">Todos</option>
+			<option value="1">Entradas</option>
+			<option value="2">Saídas</option>
+		</select>
+		<label>Produto</label>
+		<select name="inProduto" class="ms-3 me-3">
+			@foreach (var item in prod)
+			{
+				<option value="@item.Nome">@item.Nome</option>
+			}
+		</select>
+		<button asp-action="SearchMov" class="btn btn-success">Filtrar</button>
+	</div>
+</form>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Nota)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DataHora)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TipoMovimentacao)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Produto)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Quantidade)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Unitario)
+			</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nota)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DataHora)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TipoMovimentacao)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Produto)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Quantidade)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Unitario)
+				</td>
+
+			</tr>
+		}
+	</tbody>
+</table>
