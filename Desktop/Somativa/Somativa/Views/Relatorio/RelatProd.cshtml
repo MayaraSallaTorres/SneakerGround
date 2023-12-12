@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Somativa.Models.Produto>
+
+@{
+	ViewData["Title"] = "RelatProd";
+
+	List<Categoria> categorias = new List<Categoria>();
+	categorias.Add(new Categoria { CategoriaId = new Guid(), Nome = "Todas" });
+	var categ = ViewData["Categ"] as List<Categoria>;
+
+	foreach (var item in categ)
+	{
+		categorias.Add(new Categoria { CategoriaId = item.CategoriaId, Nome = item.Nome });
+	}
+}
+
+<div class="text-center my-5">
+	<h1>Relatório de Produtos</h1>
+</div>
+
+<!--
+<img src="@Url.Action("GetImage", "Relatorio", new { imageName = "imagem.png" })" alt="Descrição da imagem">
+-->
+<form>
+	<div id="filtros" class="justify-content-between">
+		<label style="font-size: 20px;">Categoria:</label>
+		<select name="inCategoria" class="ms-3 me-3 btn btn-lg btn-light col-2" style="border:solid; border-color:#E9741F" ">
+		@foreach (var item in categorias)
+		{
+				<option value="@item.CategoriaId">@item.Nome</option>
+		}
+		</select>
+		<label style="font-size: 20px;">Nome:</label>
+		<input name="inNome" type="text" class="ms-3 me-3 class=" btn btn-lg btn-light col-2" style="border:solid; border-color:#E9741F" />
+		<button asp-action="SearchProd" class="btn btn-lg btn-light col-1" style="border:solid; border-color:#E9741F">Filtrar</button>
+	</div>
+</form>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Nome)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Categoria.Nome)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Estoque)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Preco)
+			</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nome)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Categoria.Nome)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Estoque)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Preco)
+				</td>
+
+			</tr>
+		}
+	</tbody>
+</table>

@@ -1,0 +1,18 @@
+﻿@model Somativa.Models.Venda
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="text-center" style="background-color:#D9D9D9; border:solid; border-color:#E9741F; height: 400px; margin-top:100px">
+    <div class="row" style="margin-top: 20px">
+        <h1 class="text-center">Excluir</h1>
+    </div>
+    <h3 class="text-center">Você tem certeza de que deseja excluir essa informação?</h3>
+    <br />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="VendaId" />
+        <a asp-action="Index" class="btn btn-lg btn-light col-1" style="border:solid; border-color:#E9741F">Voltar</a>
+        <input type="submit" value="Excluir" class="btn btn-lg btn-light col-1" style="border:solid; border-color:#E9741F" />
+    </form>
+</div>

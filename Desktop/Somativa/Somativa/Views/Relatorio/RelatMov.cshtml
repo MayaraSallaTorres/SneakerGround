@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Somativa.Models.Movimentacao>
+
+@{
+	ViewData["Title"] = "RelatMov";
+	var prod = ViewData["Produtos"] as List<Produto>;
+	prod.Insert(0, new Produto { ProdutoId = new Guid(), Nome = "Todos" });
+}
+<div class="text-center my-5">
+	<h1>Relatório de Movimentações</h1>
+</div>
+<form>
+	<div class="mt-3 mb-3">
+		<label style="font-size: 20px;">Data início:</label>
+		<input name="inDataIni" type="date" class="ms-3 me-3 btn btn-lg btn-light col-1" style="font-size: 10px; border:solid; border-color:#E9741F" />
+		<label style="font-size: 20px;">Data fim:</label>
+		<input name="inDataFim" type="date" class="ms-3 me-3 btn btn-lg btn-light col-1" style="font-size: 10px; border:solid; border-color:#E9741F" />
+		<label style="font-size: 20px;">Tipo de movimentação:</label>
+		<select name="inTipo" class="ms-3 me-3 btn btn-lg btn-light col-1" style="border:solid; border-color:#E9741F">
+			<option value="0">Todos</option>
+			<option value="1">Entradas</option>
+			<option value="2">Saídas</option>
+		</select>
+		<label style="font-size: 20px;">Produto:</label>
+		<select name="inProduto" class="ms-3 me-3 btn btn-lg btn-light col-2" style="font-size: 12px; border:solid; border-color:#E9741F">
+			@foreach (var item in prod)
+			{
+				<option value="@item.Nome">@item.Nome</option>
+			}
+		</select>
+		<button asp-action="SearchMov" class="btn btn-lg btn-light col-1" style="border:solid; border-color:#E9741F">Filtrar</button>
+	</div>
+</form>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Nota)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DataHora)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TipoMovimentacao)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Produto)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Quantidade)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Unitario)
+			</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nota)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DataHora)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TipoMovimentacao)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Produto)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Quantidade)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Unitario)
+				</td>
+
+			</tr>
+		}
+	</tbody>
+</table>

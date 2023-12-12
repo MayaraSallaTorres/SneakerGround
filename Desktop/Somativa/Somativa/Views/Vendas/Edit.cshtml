@@ -1,0 +1,47 @@
+﻿@model Somativa.Models.Venda
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="text-center my-5">
+    <h1>Editar vendas</h1>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VendaId" />
+            <div class="form-group">
+                <label asp-for="Nota" class="control-label"></label>
+                <input asp-for="Nota" class="form-control" style="border:solid; border-color:#E9741F" />
+                <span asp-validation-for="Nota" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClienteId" class="control-label"></label>
+                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId" style="border:solid; border-color:#E9741F"></select>
+                <span asp-validation-for="ClienteId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataHora" class="control-label"></label>
+                <input asp-for="DataHora" type="date" class="form-control" style="border:solid; border-color:#E9741F" />
+                <span asp-validation-for="DataHora" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="row">
+                <div class=" col-2 me-5">
+                    <input type="submit" value="Salvar" class="btn btn-lg btn-light" style="border:solid; border-color:#E9741F" />
+                </div>
+                <div class="ms-5 group-form col-2">
+                    <a asp-action="Index" class="btn btn-lg btn-light" style="border:solid; border-color:#E9741F">Voltar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
